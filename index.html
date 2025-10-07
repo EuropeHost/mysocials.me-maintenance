@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -20,6 +20,10 @@
         --color-bg-light: #f0f2f5;
         --color-grid-dark: rgba(255, 255, 255, 0.07);
         --color-grid-light: rgba(0, 0, 0, 0.07);
+        --color-glass-bg-light: rgba(255, 255, 255, 0.1);
+        --color-glass-bg-dark: rgba(44, 44, 77, 0.2);
+        --color-glass-border-light: rgba(255, 255, 255, 0.15);
+        --color-glass-border-dark: rgba(255, 255, 255, 0.07);
       }
 
       body {
@@ -37,6 +41,7 @@
         color: var(--color-text-light);
         overflow: hidden;
         position: relative;
+        line-height: 1.6;
       }
 
       body.dark-mode {
@@ -107,59 +112,84 @@
         animation: float 20s infinite reverse ease-in-out;
       }
 
-      .content-wrapper {
-        max-width: 800px;
-        padding: 40px 20px;
+      .glass-card {
+        background: var(--color-glass-bg-light);
+        backdrop-filter: blur(2px);
+        border: 1px solid var(--color-glass-border-light);
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         text-align: center;
+        max-width: 800px;
+        width: 90%;
         position: relative;
         z-index: 1;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        justify-items: center;
+      }
+
+      body.dark-mode .glass-card {
+        background: var(--color-glass-bg-dark);
+        border: 1px solid var(--color-glass-border-dark);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
       }
 
       h1 {
         font-size: 3.5em;
-        margin-bottom: 10px;
+        margin: 0;
         color: var(--color-primary);
         font-weight: 700;
+        letter-spacing: -1px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin: 0;
+        color: var(--color-primary);
+        font-weight: 600;
       }
 
       p {
-        font-size: 1.1em;
-        line-height: 1.6;
-        margin-bottom: 20px;
+        margin: 0;
       }
 
-      .features ul {
-        list-style: none;
-        padding: 0;
-        margin: 30px 0;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
       }
 
-      .features li {
+      .features-grid .feature-item {
         background-color: var(--color-secondary);
         color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
+        padding: 15px;
+        border-radius: 10px;
         font-weight: 600;
         font-size: 0.9em;
         transition: background-color 0.3s ease;
       }
 
-      .features li:hover {
+      .features-grid .feature-item:hover {
         background-color: var(--color-primary);
       }
 
       .project-info {
-        margin-top: 40px;
         font-size: 0.9em;
         line-height: 1.5;
+        width: 100%;
       }
 
       .project-info a,
-      .imprint-license a {
+      .imprint-link a {
         color: var(--color-primary);
         text-decoration: none;
         font-weight: 600;
@@ -167,7 +197,7 @@
       }
 
       .project-info a:hover,
-      .imprint-license a:hover {
+      .imprint-link a:hover {
         color: var(--color-secondary);
         text-decoration: underline;
       }
@@ -212,9 +242,26 @@
         }
       }
 
-      .imprint-license {
-        margin-top: 30px;
+      .imprint-link {
         font-size: 0.85em;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2.5em;
+        }
+        p {
+          font-size: 1em;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .glass-card {
+          padding: 30px 15px;
+          gap: 15px;
+        }
       }
     </style>
   </head>
@@ -265,25 +312,24 @@
 
     <button class="theme-toggle" id="theme-toggle"></button>
 
-    <div class="content-wrapper">
+    <div class="glass-card">
       <h1>mysocials.me</h1>
       <p>
-        Your all-in-one link management platform is launching soon! Get ready
-        to connect, share, and manage your online presence like never before.
+        Your ultimate hub for managing and sharing all your online links,
+        coming soon!
       </p>
 
-      <div class="features">
-        <ul>
-          <li>Link Shortening</li>
-          <li>Multi-Profile Management</li>
-          <li>Profile Aliases</li>
-          <li>Social Media Integrations</li>
-        </ul>
+      <h2>Platform Highlights</h2>
+      <div class="features-grid">
+        <div class="feature-item">Link Shortening</div>
+        <div class="feature-item">Multi-Profile Management</div>
+        <div class="feature-item">Profile Aliases</div>
+        <div class="feature-item">Social Media Integrations</div>
       </div>
 
       <p>
-        We're working hard to bring you a seamless experience for all your
-        social and professional links. Stay tuned for updates!
+        We're crafting a seamless experience to centralize your digital
+        presence. Stay updated on our launch progress!
       </p>
 
       <div class="project-info">
@@ -295,11 +341,13 @@
         <p>
           Led by
           <a href="https://fternis.de" target="_blank">fternis.de</a>
-          (<a href="https://pleaehireme.eu" target="_blank">pleasehireme.eu</a>)
+          (
+          <a href="https://pleaehireme.eu" target="_blank">pleasehireme.eu</a
+          >)
         </p>
       </div>
 
-      <div class="imprint-license">
+      <div class="imprint-link">
         <a href="https://fternis.de/imprint" target="_blank">Imprint</a>
       </div>
     </div>
