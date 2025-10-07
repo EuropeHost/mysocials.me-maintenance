@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mysocials.me - Coming Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #8a2be2;
+        --color-secondary: #a76ed2;
+        --color-text-dark: #e0e0e0;
+        --color-text-light: #212121;
+        --color-bg-dark: #1a1a2e;
+        --color-bg-light: #f0f2f5;
+        --color-grid-dark: rgba(255, 255, 255, 0.05);
+        --color-grid-light: rgba(0, 0, 0, 0.05);
+        --color-card-dark: #2c2c4d;
+        --color-card-light: #ffffff;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        background-color: var(--color-bg-light);
+        color: var(--color-text-light);
+        overflow: hidden;
+      }
+
+      body.dark-mode {
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-dark);
+      }
+
+      .grid-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(
+            to right,
+            var(--color-grid-light) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            var(--color-grid-light) 1px,
+            transparent 1px
+          );
+        background-size: 40px 40px;
+        opacity: 0.8;
+        z-index: -1;
+      }
+
+      body.dark-mode .grid-background {
+        background-image:
+          linear-gradient(
+            to right,
+            var(--color-grid-dark) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            var(--color-grid-dark) 1px,
+            transparent 1px
+          );
+      }
+
+      .svg-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .svg-overlay svg {
+        position: absolute;
+        opacity: 0.1;
+        filter: saturate(0);
+      }
+
+      .svg-overlay .circle {
+        fill: var(--color-secondary);
+        animation: float 15s infinite ease-in-out;
+      }
+
+      .svg-overlay .square {
+        fill: var(--color-primary);
+        animation: float 20s infinite reverse ease-in-out;
+      }
+
+      .container {
+        max-width: 800px;
+        background-color: var(--color-card-light);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        transition:
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      body.dark-mode .container {
+        background-color: var(--color-card-dark);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      h1 {
+        font-size: 3.5em;
+        margin-bottom: 10px;
+        color: var(--color-primary);
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .features ul {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .features li {
+        background-color: var(--color-secondary);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9em;
+        transition: background-color 0.3s ease;
+      }
+
+      .features li:hover {
+        background-color: var(--color-primary);
+      }
+
+      .project-info {
+        margin-top: 40px;
+        font-size: 0.9em;
+        line-height: 1.5;
+      }
+
+      .project-info a,
+      .imprint-license a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .project-info a:hover,
+      .imprint-license a:hover {
+        color: var(--color-secondary);
+        text-decoration: underline;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: var(--color-card-light);
+        border: 1px solid var(--color-grid-light);
+        color: var(--color-text-light);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.2em;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      body.dark-mode .theme-toggle {
+        background-color: var(--color-card-dark);
+        border: 1px solid var(--color-grid-dark);
+        color: var(--color-text-dark);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .theme-toggle:hover {
+        opacity: 0.8;
+      }
+
+      .theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(10px, 10px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+
+      .imprint-license {
+        margin-top: 30px;
+        font-size: 0.85em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-background"></div>
+    <div class="svg-overlay">
+      <svg
+        class="circle"
+        width="100"
+        height="100"
+        style="top: 10%; left: 15%"
+      >
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+      <svg
+        class="square"
+        width="80"
+        height="80"
+        style="top: 30%; right: 20%"
+      >
+        <rect x="10" y="10" width="60" height="60" />
+      </svg>
+      <svg
+        class="circle"
+        width="120"
+        height="120"
+        style="bottom: 5%; left: 40%"
+      >
+        <circle cx="60" cy="60" r="50" />
+      </svg>
+      <svg
+        class="square"
+        width="90"
+        height="90"
+        style="top: 50%; left: 5%"
+      >
+        <rect x="5" y="5" width="80" height="80" />
+      </svg>
+      <svg
+        class="circle"
+        width="70"
+        height="70"
+        style="bottom: 20%; right: 10%"
+      >
+        <circle cx="35" cy="35" r="30" />
+      </svg>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle"></button>
+
+    <div class="container">
+      <h1>mysocials.me</h1>
+      <p>
+        Your all-in-one link management platform is launching soon! Get ready
+        to connect, share, and manage your online presence like never before.
+      </p>
+
+      <div class="features">
+        <ul>
+          <li>Link Shortening</li>
+          <li>Multi-Profile Management</li>
+          <li>Profile Aliases</li>
+          <li>Social Media Integrations</li>
+        </ul>
+      </div>
+
+      <p>
+        We're working hard to bring you a seamless experience for all your
+        social and professional links. Stay tuned for updates!
+      </p>
+
+      <div class="project-info">
+        <p>
+          A free project from
+          <a href="https://europehost.eu" target="_blank">europehost.eu</a> by
+          <a href="https://xpsystems.eu" target="_blank">XPsystems.eu</a>.
+        </p>
+        <p>
+          Led by
+          <a href="https://fternis.de" target="_blank">fternis.de</a>
+          (<a href="https://pleaehireme.eu" target="_blank">pleasehireme.eu</a>)
+        </p>
+      </div>
+
+      <div class="imprint-license">
+        <a href="https://fternis.de/imprint" target="_blank">Imprint</a>
+      </div>
+    </div>
+
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+
+      const sunSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        </svg>
+      `;
+      const moonSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      `;
+
+      const setToggleButtonIcon = (isDarkMode) => {
+        themeToggle.innerHTML = isDarkMode ? moonSVG : sunSVG;
+      };
+
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        body.classList.add('dark-mode');
+        setToggleButtonIcon(true);
+      } else {
+        setToggleButtonIcon(false);
+      }
+
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        setToggleButtonIcon(isDarkMode);
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>
