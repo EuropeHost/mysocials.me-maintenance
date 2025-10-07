@@ -18,10 +18,8 @@
         --color-text-light: #212121;
         --color-bg-dark: #1a1a2e;
         --color-bg-light: #f0f2f5;
-        --color-grid-dark: rgba(255, 255, 255, 0.05);
-        --color-grid-light: rgba(0, 0, 0, 0.05);
-        --color-card-dark: #2c2c4d;
-        --color-card-light: #ffffff;
+        --color-grid-dark: rgba(255, 255, 255, 0.07);
+        --color-grid-light: rgba(0, 0, 0, 0.07);
       }
 
       body {
@@ -38,6 +36,7 @@
         background-color: var(--color-bg-light);
         color: var(--color-text-light);
         overflow: hidden;
+        position: relative;
       }
 
       body.dark-mode {
@@ -54,30 +53,30 @@
         background-image:
           linear-gradient(
             to right,
-            var(--color-grid-light) 1px,
-            transparent 1px
+            var(--color-grid-light) 2px,
+            transparent 2px
           ),
           linear-gradient(
             to bottom,
-            var(--color-grid-light) 1px,
-            transparent 1px
+            var(--color-grid-light) 2px,
+            transparent 2px
           );
-        background-size: 40px 40px;
+        background-size: 80px 80px;
         opacity: 0.8;
-        z-index: -1;
+        z-index: -2;
       }
 
       body.dark-mode .grid-background {
         background-image:
           linear-gradient(
             to right,
-            var(--color-grid-dark) 1px,
-            transparent 1px
+            var(--color-grid-dark) 2px,
+            transparent 2px
           ),
           linear-gradient(
             to bottom,
-            var(--color-grid-dark) 1px,
-            transparent 1px
+            var(--color-grid-dark) 2px,
+            transparent 2px
           );
       }
 
@@ -108,23 +107,12 @@
         animation: float 20s infinite reverse ease-in-out;
       }
 
-      .container {
+      .content-wrapper {
         max-width: 800px;
-        background-color: var(--color-card-light);
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px 20px;
         text-align: center;
         position: relative;
         z-index: 1;
-        transition:
-          background-color 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      body.dark-mode .container {
-        background-color: var(--color-card-dark);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       }
 
       h1 {
@@ -188,10 +176,9 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        background-color: var(--color-card-light);
-        border: 1px solid var(--color-grid-light);
-        color: var(--color-text-light);
-        border-radius: 50%;
+        background-color: transparent;
+        border: none;
+        color: inherit;
         width: 40px;
         height: 40px;
         display: flex;
@@ -199,19 +186,8 @@
         align-items: center;
         cursor: pointer;
         font-size: 1.2em;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease,
-          border-color 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      body.dark-mode .theme-toggle {
-        background-color: var(--color-card-dark);
-        border: 1px solid var(--color-grid-dark);
-        color: var(--color-text-dark);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: opacity 0.3s ease;
+        z-index: 10;
       }
 
       .theme-toggle:hover {
@@ -219,8 +195,8 @@
       }
 
       .theme-toggle svg {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
         stroke: currentColor;
       }
 
@@ -289,7 +265,7 @@
 
     <button class="theme-toggle" id="theme-toggle"></button>
 
-    <div class="container">
+    <div class="content-wrapper">
       <h1>mysocials.me</h1>
       <p>
         Your all-in-one link management platform is launching soon! Get ready
@@ -319,7 +295,9 @@
         <p>
           Led by
           <a href="https://fternis.de" target="_blank">fternis.de</a>
-          (<a href="https://pleaehireme.eu" target="_blank">pleasehireme.eu</a>)
+          (
+          <a href="https://pleaehireme.eu" target="_blank">pleasehireme.eu</a
+          >)
         </p>
       </div>
 
